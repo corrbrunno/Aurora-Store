@@ -1,0 +1,60 @@
+CT-F02 - login, logout e invalidacao de sessao (RF02).
+Fonte: sondagem/saida_corrigido.txt (versao 1.0.0-corrigida)
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"47a8a9c40648077deff9988b8d98da9cae91cd9744b89172","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### login com senha errada
+POST /api/auth/login -> 401
+corpo: {"error":"E-mail ou senha incorretos."}
+
+### login de usuario inexistente
+POST /api/auth/login -> 401
+corpo: {"error":"E-mail ou senha incorretos."}
+
+### me com token valido
+GET /api/auth/me -> 200
+corpo: {"user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### logout
+POST /api/auth/logout -> 200
+corpo: {"ok":true}
+
+### me depois do logout (token deve ser invalidado)
+GET /api/auth/me -> 401
+corpo: {"error":"Autenticação necessária."}
+
+FIM DA FASE F1
+
+==============================================================================
+SONDAGEM ?�� fase F2 ?�� base http://127.0.0.1:3000
+executado em 2026-11-17T16:48:59.773Z
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"b91d004e8d03b3930a0dbac8fb229f5ee4ff1204eedbb976","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"741d4f49d1621c050aecced9a73c78716fcdf7e82facd604","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"b7fcb5cb388b48cc16cc26ddb99c01782fc6b135ccee852c","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"f42c65bd5472e8ca63151c622def459a9c011b2f8b7ca55f","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"6f80774a4da47bac3cebe34ce7940477b5fc45fc0b04a5e0","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"7251e389caddc0615ba9b5efabe7f4b9e53bca5c6d1460c8","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"6ef71fe606adb3f278f4b9f43a01cc7d5e53e40859139c05","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}

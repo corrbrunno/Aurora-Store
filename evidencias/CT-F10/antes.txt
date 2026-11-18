@@ -1,0 +1,31 @@
+CT-F10 - historico e detalhe dos proprios pedidos (RF10).
+Fonte: sondagem/saida_sondagem.txt (versao 1.0.0)
+
+### checkout do cliente-a para gerar pedido
+POST /api/checkout -> 201
+corpo: {"order":{"id":"ped-1201","userId":"cliente-a","createdAt":"2026-11-17T16:28:26.353Z","items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":1,"lineTotal":150}],"subtotal":150,"discount":0,"shipping":18.5,"total":168.5,"couponCode":null,"benefit":null,"address":{"street":"Rua Teste","number":"10","district":"Centro","city":"Maricá","state":"RJ","zip":"24900000"},"status":"confirmado"}}
+>>> pedido criado: ped-1201
+
+### historico do cliente-b
+GET /api/orders -> 200
+corpo: [{"id":"pedido-cliente-b","userId":"cliente-b","createdAt":"2026-01-05T00:00:00Z","status":"pago","items":[{"id":"item-00001","productId":"produto-0462","name":"Eletrônicos ?�� Produto 0463","quantity":1,"unitPriceCents":30001,"unitPrice":300.01,"lineTotalCents":30001,"lineTotal":300.01,"quantitySoldToCustomer":1},{"id":"item-00002","productId":"produto-0997","name":"Moda ?�� Produto 0998","quantity":2,"unitPriceCents":15000,"unitPrice":150,"lineTotalCents":30000,"lineTotal":300,"quantitySoldToCustomer":2}],"subtotalCents":60001,"discountCents":15000,"shippingCents":0,"totalCents":45001,"subtotal":600.01,"discount":150,"shipping":0,"total":450.01,"couponId":"cupom-061","couponCode":"DIDATICO061" ...[+971 bytes]
+
+### historico do cliente-a
+GET /api/orders -> 200
+corpo: [{"id":"pedido-00847","userId":"cliente-a","createdAt":"2026-06-30T06:00:00Z","status":"enviado","items":[{"id":"item-01693","productId":"produto-0317","name":"Moda ?�� Produto 0318","quantity":2,"unitPriceCents":9990,"unitPrice":99.9,"lineTotalCents":19980,"lineTotal":199.8,"quantitySoldToCustomer":2},{"id":"item-01694","productId":"produto-0844","name":"Esportes ?�� Produto 0845","quantity":4,"unitPriceCents":15000,"unitPrice":150,"lineTotalCents":60000,"lineTotal":600,"quantitySoldToCustomer":4}],"subtotalCents":79980,"discountCents":7998,"shippingCents":0,"totalCents":71982,"subtotal":799.8,"discount":79.98,"shipping":0,"total":719.82,"couponId":null,"couponCode":null,"address":{"street":"Ru ...[+2165 bytes]
+
+### consulta do pedido depois de reiniciar o servidor (sem reset)
+GET /api/orders/ped-1201 -> 404
+corpo: {"error":"Pedido não encontrado."}
+
+### historico do cliente-a depois do restart
+GET /api/orders -> 200
+corpo: [{"id":"pedido-00847","userId":"cliente-a","createdAt":"2026-06-30T06:00:00Z","status":"enviado","items":[{"id":"item-01693","productId":"produto-0317","name":"Moda ?�� Produto 0318","quantity":2,"unitPriceCents":9990,"unitPrice":99.9,"lineTotalCents":19980,"lineTotal":199.8,"quantitySoldToCustomer":2},{"id":"item-01694","productId":"produto-0844","name":"Esportes ?�� Produto 0845","quantity":4,"unitPriceCents":15000,"unitPrice":150,"lineTotalCents":60000,"lineTotal":600,"quantitySoldToCustomer":4}],"subtotalCents":79980,"discountCents":7998,"shippingCents":0,"totalCents":71982,"subtotal":799.8,"discount":79.98,"shipping":0,"total":719.82,"couponId":null,"couponCode":null,"address":{"street":"Ru ...[+2165 bytes]
+
+FIM DA FASE F7B
+
+FIM DA SONDAGEM
+
+==============================================================================
+SONDAGEM ?�� fase F8 ?�� base http://127.0.0.1:3000
+executado em 2026-11-17T16:29:48.855Z

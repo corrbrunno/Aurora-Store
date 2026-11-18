@@ -1,0 +1,297 @@
+SONDAGEM DA LOJA AURORA 1.0.0 - comportamento observado (sem arquivos de teste)
+maquina: Microsoft Windows 11 Pro | node v24.4.0
+
+
+==============================================================================
+SONDAGEM ?�� fase F1 ?�� base http://127.0.0.1:3000
+executado em 2026-11-17T16:27:29.088Z
+
+### cadastro valido
+POST /api/auth/register -> 201
+corpo: {"token":"8fc8c2e7be5b5dff8d2e16c1efcaad380d13a12e3390ae47","user":{"id":"u-mwkwoa94","name":"Cliente Probe","email":"probe.1794932849089@loja.test","role":"customer"}}
+
+### cadastro com e-mail ja existente
+POST /api/auth/register -> 400
+corpo: {"error":"Dados inválidos"}
+
+### cadastro com senha curta (3 caracteres)
+POST /api/auth/register -> 400
+corpo: {"error":"Dados inválidos"}
+
+### cadastro com nome de 2 letras
+POST /api/auth/register -> 400
+corpo: {"error":"Dados inválidos"}
+
+### cadastro com e-mail sem arroba
+POST /api/auth/register -> 400
+corpo: {"error":"Dados inválidos"}
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"d8f4fb37f36bcb06bf3232dad975232fd8c0e248954cd953","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### login com senha errada
+POST /api/auth/login -> 401
+corpo: {"error":"E-mail ou senha incorretos."}
+
+### login de usuario inexistente
+POST /api/auth/login -> 401
+corpo: {"error":"E-mail ou senha incorretos."}
+
+### me com token valido
+GET /api/auth/me -> 200
+corpo: {"user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### logout
+POST /api/auth/logout -> 200
+corpo: {"ok":true}
+
+### me depois do logout (token deve ser invalidado)
+GET /api/auth/me -> 401
+corpo: {"error":"Autenticação necessária."}
+
+FIM DA FASE F1
+
+==============================================================================
+SONDAGEM ?�� fase F2 ?�� base http://127.0.0.1:3000
+executado em 2026-11-17T16:27:40.029Z
+
+### catalogo publico
+GET /api/products -> 200
+corpo: [{"id":"produto-teste","sku":"SKU-00001","name":"Produto Teste","category":"Informática","description":"Produto fictício para laboratório de testes. Modelo 0001.","priceCents":15000,"price":150,"stock":5,"active":true,"weightGrams":1921,"inStock":true},{"id":"produto-0001","sku":"SKU-00002","name":"Livros ?�� Produto 0002","category":"Livros","description":"Produto fictício para laboratório de testes. Modelo 0002.","priceCents":20000,"price":200,"stock":2,"active":true,"weightGrams":4671,"inStock":true},{"id":"produto-0002","sku":"SKU-00003","name":"Papelaria ?�� Produto 0003","category":"Papelaria","description":"Produto fictício para laboratório de testes. Modelo 0003.","priceCents":30000,"pri ...[+300513 bytes]
+>>> itens: 1159
+>>> campos do 1o item: id, sku, name, category, description, priceCents, price, stock, active, weightGrams, inStock
+>>> tamanho da resposta: 301213 bytes
+
+### busca por texto (busca=papelaria)
+GET /api/products?busca=papelaria -> 200
+corpo: [{"id":"produto-teste","sku":"SKU-00001","name":"Produto Teste","category":"Informática","description":"Produto fictício para laboratório de testes. Modelo 0001.","priceCents":15000,"price":150,"stock":5,"active":true,"weightGrams":1921,"inStock":true},{"id":"produto-0001","sku":"SKU-00002","name":"Livros ?�� Produto 0002","category":"Livros","description":"Produto fictício para laboratório de testes. Modelo 0002.","priceCents":20000,"price":200,"stock":2,"active":true,"weightGrams":4671,"inStock":true},{"id":"produto-0002","sku":"SKU-00003","name":"Papelaria ?�� Produto 0003","category":"Papelaria","description":"Produto fictício para laboratório de testes. Modelo 0003.","priceCents":30000,"pri ...[+300513 bytes]
+>>> itens com ?busca=papelaria: 1159
+
+### filtro por categoria (categoria=Papelaria)
+GET /api/products?categoria=Papelaria -> 200
+corpo: [{"id":"produto-teste","sku":"SKU-00001","name":"Produto Teste","category":"Informática","description":"Produto fictício para laboratório de testes. Modelo 0001.","priceCents":15000,"price":150,"stock":5,"active":true,"weightGrams":1921,"inStock":true},{"id":"produto-0001","sku":"SKU-00002","name":"Livros ?�� Produto 0002","category":"Livros","description":"Produto fictício para laboratório de testes. Modelo 0002.","priceCents":20000,"price":200,"stock":2,"active":true,"weightGrams":4671,"inStock":true},{"id":"produto-0002","sku":"SKU-00003","name":"Papelaria ?�� Produto 0003","category":"Papelaria","description":"Produto fictício para laboratório de testes. Modelo 0003.","priceCents":30000,"pri ...[+300513 bytes]
+>>> itens com ?categoria=Papelaria: 1159
+
+### produto-teste por id
+GET /api/products/produto-teste -> 200
+corpo: {"id":"produto-teste","sku":"SKU-00001","name":"Produto Teste","category":"Informática","description":"Produto fictício para laboratório de testes. Modelo 0001.","priceCents":15000,"price":150,"stock":5,"active":true,"weightGrams":1921,"inStock":true}
+
+### produto inexistente
+GET /api/products/nao-existe -> 404
+corpo: {"error":"Produto não encontrado."}
+
+FIM DA FASE F2
+
+==============================================================================
+SONDAGEM ?�� fase F3 ?�� base http://127.0.0.1:3000
+executado em 2026-11-17T16:27:50.836Z
+
+### cotacao de 2 x produto-teste (subtotal 300)
+POST /api/cart/quote -> 200
+corpo: {"ok":true,"items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":2,"lineTotal":300}],"subtotal":300,"discount":30,"automaticDiscount":30,"couponDiscount":0,"benefit":"automatico","shipping":18.5,"total":288.5}
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"63b44d9edf4a4b424c03bac746790efd34918f67d752b770","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### estoque antes da compra
+GET /api/products/produto-teste -> 200
+corpo: {"id":"produto-teste","sku":"SKU-00001","name":"Produto Teste","category":"Informática","description":"Produto fictício para laboratório de testes. Modelo 0001.","priceCents":15000,"price":150,"stock":5,"active":true,"weightGrams":1921,"inStock":true}
+
+### checkout de 2 unidades
+POST /api/checkout -> 201
+corpo: {"order":{"id":"ped-1201","userId":"cliente-a","createdAt":"2026-11-17T16:27:50.992Z","items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":2,"lineTotal":300}],"subtotal":300,"discount":30,"shipping":18.5,"total":318.5,"couponCode":null,"benefit":"automatico","address":{"street":"Rua Teste","number":"10","district":"Centro","city":"Maricá","state":"RJ","zip":"24900000"},"status":"confirmado"}}
+
+### estoque depois da compra
+GET /api/products/produto-teste -> 200
+corpo: {"id":"produto-teste","sku":"SKU-00001","name":"Produto Teste","category":"Informática","description":"Produto fictício para laboratório de testes. Modelo 0001.","priceCents":15000,"price":150,"stock":5,"active":true,"weightGrams":1921,"inStock":true}
+
+### checkout de 6 unidades com estoque 5
+POST /api/checkout -> 201
+corpo: {"order":{"id":"ped-1202","userId":"cliente-a","createdAt":"2026-11-17T16:27:51.017Z","items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":6,"lineTotal":900}],"subtotal":900,"discount":90,"shipping":0,"total":900,"couponCode":null,"benefit":"automatico","address":{"street":"Rua Teste","number":"10","district":"Centro","city":"Maricá","state":"RJ","zip":"24900000"},"status":"confirmado"}}
+
+### checkout com quantidade 0
+POST /api/checkout -> 400
+corpo: {"error":"A quantidade não pode ser zero."}
+
+### checkout com quantidade -1
+POST /api/checkout -> 201
+corpo: {"order":{"id":"ped-1203","userId":"cliente-a","createdAt":"2026-11-17T16:27:51.041Z","items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":-1,"lineTotal":-150}],"subtotal":-150,"discount":0,"shipping":18.5,"total":-131.5,"couponCode":null,"benefit":null,"address":{"street":"Rua Teste","number":"10","district":"Centro","city":"Maricá","state":"RJ","zip":"24900000"},"status":"confirmado"}}
+
+### checkout com quantidade fracionaria 1.5
+POST /api/checkout -> 400
+corpo: {"error":"A quantidade deve ser um número inteiro."}
+
+### checkout acima do estoque: estoque final
+GET /api/products/produto-teste -> 200
+corpo: {"id":"produto-teste","sku":"SKU-00001","name":"Produto Teste","category":"Informática","description":"Produto fictício para laboratório de testes. Modelo 0001.","priceCents":15000,"price":150,"stock":5,"active":true,"weightGrams":1921,"inStock":true}
+
+FIM DA FASE F3
+
+==============================================================================
+SONDAGEM ?�� fase F4 ?�� base http://127.0.0.1:3000
+executado em 2026-11-17T16:28:02.463Z
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"5a28227436693970bc0537828790c426a0481d2fb4226c96","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### checkout so com a rua (endereco incompleto)
+POST /api/checkout -> 201
+corpo: {"order":{"id":"ped-1201","userId":"cliente-a","createdAt":"2026-11-17T16:28:02.612Z","items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":1,"lineTotal":150}],"subtotal":150,"discount":0,"shipping":18.5,"total":168.5,"couponCode":null,"benefit":null,"address":{"street":"Rua Teste","number":"","district":"","city":"","state":"","zip":""},"status":"confirmado"}}
+
+### checkout com endereco completo
+POST /api/checkout -> 201
+corpo: {"order":{"id":"ped-1202","userId":"cliente-a","createdAt":"2026-11-17T16:28:02.635Z","items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":1,"lineTotal":150}],"subtotal":150,"discount":0,"shipping":18.5,"total":168.5,"couponCode":null,"benefit":null,"address":{"street":"Rua Teste","number":"10","district":"Centro","city":"Maricá","state":"RJ","zip":"24900000"},"status":"confirmado"}}
+
+FIM DA FASE F4
+
+==============================================================================
+SONDAGEM ?�� fase F5 ?�� base http://127.0.0.1:3000
+executado em 2026-11-17T16:28:13.652Z
+
+### cotacao com cupom ANTIGO (vencido em 06/10/2026)
+POST /api/cart/quote -> 200
+corpo: {"ok":true,"items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":2,"lineTotal":300}],"subtotal":300,"discount":60,"automaticDiscount":30,"couponDiscount":60,"benefit":"cupom","shipping":18.5,"total":258.5}
+
+### cotacao com cupom VINTE (20% valido)
+POST /api/cart/quote -> 200
+corpo: {"ok":true,"items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":2,"lineTotal":300}],"subtotal":300,"discount":60,"automaticDiscount":30,"couponDiscount":60,"benefit":"cupom","shipping":18.5,"total":258.5}
+
+### cotacao com cupom CINCO (5% valido)
+POST /api/cart/quote -> 200
+corpo: {"ok":true,"items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":2,"lineTotal":300}],"subtotal":300,"discount":30,"automaticDiscount":30,"couponDiscount":15,"benefit":"automatico","shipping":18.5,"total":288.5}
+
+### cotacao com cupom inexistente
+POST /api/cart/quote -> 400
+corpo: {"error":"Cupom inválido."}
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"9cb8b2f627a202330b91991e58bb4ef0feefe4ba6d75dc3b","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### checkout aceitando cupom vencido ANTIGO
+POST /api/checkout -> 201
+corpo: {"order":{"id":"ped-1201","userId":"cliente-a","createdAt":"2026-11-17T16:28:13.810Z","items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":2,"lineTotal":300}],"subtotal":300,"discount":60,"shipping":18.5,"total":318.5,"couponCode":"ANTIGO","benefit":"cupom","address":{"street":"Rua Teste","number":"10","district":"Centro","city":"Maricá","state":"RJ","zip":"24900000"},"status":"confirmado"}}
+
+FIM DA FASE F5
+
+==============================================================================
+SONDAGEM ?�� fase F6 ?�� base http://127.0.0.1:3000
+executado em 2026-11-17T16:28:26.083Z
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"1a09491ad76659554a921543c1ff09242ca8c3ac8c367cd7","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### login cliente-b@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"93f85a79f1e4864691c79c47ed54a1939ecb320960cf4a14","user":{"id":"cliente-b","name":"Pessoa Fictícia 0002","email":"cliente-b@loja.test","role":"customer"}}
+
+### checkout do cliente-a para gerar pedido
+POST /api/checkout -> 201
+corpo: {"order":{"id":"ped-1201","userId":"cliente-a","createdAt":"2026-11-17T16:28:26.353Z","items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":1,"lineTotal":150}],"subtotal":150,"discount":0,"shipping":18.5,"total":168.5,"couponCode":null,"benefit":null,"address":{"street":"Rua Teste","number":"10","district":"Centro","city":"Maricá","state":"RJ","zip":"24900000"},"status":"confirmado"}}
+>>> pedido criado: ped-1201
+
+### cliente-b consulta o pedido do cliente-a (RN-10)
+GET /api/orders/ped-1201 -> 404
+corpo: {"error":"Pedido não encontrado."}
+
+### historico do cliente-b
+GET /api/orders -> 200
+corpo: [{"id":"pedido-cliente-b","userId":"cliente-b","createdAt":"2026-01-05T00:00:00Z","status":"pago","items":[{"id":"item-00001","productId":"produto-0462","name":"Eletrônicos ?�� Produto 0463","quantity":1,"unitPriceCents":30001,"unitPrice":300.01,"lineTotalCents":30001,"lineTotal":300.01,"quantitySoldToCustomer":1},{"id":"item-00002","productId":"produto-0997","name":"Moda ?�� Produto 0998","quantity":2,"unitPriceCents":15000,"unitPrice":150,"lineTotalCents":30000,"lineTotal":300,"quantitySoldToCustomer":2}],"subtotalCents":60001,"discountCents":15000,"shippingCents":0,"totalCents":45001,"subtotal":600.01,"discount":150,"shipping":0,"total":450.01,"couponId":"cupom-061","couponCode":"DIDATICO061" ...[+971 bytes]
+
+### historico do cliente-a
+GET /api/orders -> 200
+corpo: [{"id":"pedido-00847","userId":"cliente-a","createdAt":"2026-06-30T06:00:00Z","status":"enviado","items":[{"id":"item-01693","productId":"produto-0317","name":"Moda ?�� Produto 0318","quantity":2,"unitPriceCents":9990,"unitPrice":99.9,"lineTotalCents":19980,"lineTotal":199.8,"quantitySoldToCustomer":2},{"id":"item-01694","productId":"produto-0844","name":"Esportes ?�� Produto 0845","quantity":4,"unitPriceCents":15000,"unitPrice":150,"lineTotalCents":60000,"lineTotal":600,"quantitySoldToCustomer":4}],"subtotalCents":79980,"discountCents":7998,"shippingCents":0,"totalCents":71982,"subtotal":799.8,"discount":79.98,"shipping":0,"total":719.82,"couponId":null,"couponCode":null,"address":{"street":"Ru ...[+2165 bytes]
+
+### pedido sem token
+GET /api/orders/ped-1201 -> 401
+corpo: {"error":"Autenticação necessária."}
+
+### checkout enviando unitPrice 1 para produto de 150
+POST /api/checkout -> 201
+corpo: {"order":{"id":"ped-1202","userId":"cliente-a","createdAt":"2026-11-17T16:28:26.464Z","items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":1,"quantity":1,"lineTotal":1}],"subtotal":1,"discount":0,"shipping":18.5,"total":19.5,"couponCode":null,"benefit":null,"address":{"street":"Rua Teste","number":"10","district":"Centro","city":"Maricá","state":"RJ","zip":"24900000"},"status":"confirmado"}}
+>>> total gravado pelo servidor: 19.5
+
+FIM DA FASE F6
+
+==============================================================================
+SONDAGEM ?�� fase F7A ?�� base http://127.0.0.1:3000
+executado em 2026-11-17T16:28:38.232Z
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"8236567e7793eea0d8e67b011ba633cd51c17429985995c2","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### cria pedido para testar persistencia
+POST /api/checkout -> 201
+corpo: {"order":{"id":"ped-1201","userId":"cliente-a","createdAt":"2026-11-17T16:28:38.397Z","items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":1,"lineTotal":150}],"subtotal":150,"discount":0,"shipping":18.5,"total":168.5,"couponCode":null,"benefit":null,"address":{"street":"Rua Teste","number":"10","district":"Centro","city":"Maricá","state":"RJ","zip":"24900000"},"status":"confirmado"}}
+>>> guardado para consulta pos-restart: ped-1201
+
+FIM DA FASE F7A
+
+==============================================================================
+SONDAGEM ?�� fase F7B ?�� base http://127.0.0.1:3000
+executado em 2026-11-17T16:28:40.583Z
+>>> pedido guardado antes do restart: ped-1201
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"7e0f313af3af73ffa5895c69bcff348ca4482313073f3dd9","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### consulta do pedido depois de reiniciar o servidor (sem reset)
+GET /api/orders/ped-1201 -> 404
+corpo: {"error":"Pedido não encontrado."}
+
+### historico do cliente-a depois do restart
+GET /api/orders -> 200
+corpo: [{"id":"pedido-00847","userId":"cliente-a","createdAt":"2026-06-30T06:00:00Z","status":"enviado","items":[{"id":"item-01693","productId":"produto-0317","name":"Moda ?�� Produto 0318","quantity":2,"unitPriceCents":9990,"unitPrice":99.9,"lineTotalCents":19980,"lineTotal":199.8,"quantitySoldToCustomer":2},{"id":"item-01694","productId":"produto-0844","name":"Esportes ?�� Produto 0845","quantity":4,"unitPriceCents":15000,"unitPrice":150,"lineTotalCents":60000,"lineTotal":600,"quantitySoldToCustomer":4}],"subtotalCents":79980,"discountCents":7998,"shippingCents":0,"totalCents":71982,"subtotal":799.8,"discount":79.98,"shipping":0,"total":719.82,"couponId":null,"couponCode":null,"address":{"street":"Ru ...[+2165 bytes]
+
+FIM DA FASE F7B
+
+FIM DA SONDAGEM
+
+==============================================================================
+SONDAGEM ?�� fase F8 ?�� base http://127.0.0.1:3000
+executado em 2026-11-17T16:29:48.855Z
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"cce747f15f34663b667fdb43ac65d993939821ab25b5e656","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### login cliente-b@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"6e5e30b66ddd59da433a85f1440299842749f44a6cf5cd10","user":{"id":"cliente-b","name":"Pessoa Fictícia 0002","email":"cliente-b@loja.test","role":"customer"}}
+
+### login admin@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"8ab1017958968a61d3d765a48747babda740aefc0fb5f64e","user":{"id":"administrador","name":"Pessoa Fictícia 0003","email":"admin@loja.test","role":"admin"}}
+
+### controle: cliente-b consulta o proprio pedido do dataset
+GET /api/orders/pedido-cliente-b -> 200
+corpo: {"id":"pedido-cliente-b","userId":"cliente-b","createdAt":"2026-01-05T00:00:00Z","status":"pago","items":[{"id":"item-00001","productId":"produto-0462","name":"Eletrônicos ?�� Produto 0463","quantity":1,"unitPriceCents":30001,"unitPrice":300.01,"lineTotalCents":30001,"lineTotal":300.01},{"id":"item-00002","productId":"produto-0997","name":"Moda ?�� Produto 0998","quantity":2,"unitPriceCents":15000,"unitPrice":150,"lineTotalCents":30000,"lineTotal":300}],"subtotalCents":60001,"discountCents":15000,"shippingCents":0,"totalCents":45001,"subtotal":600.01,"discount":150,"shipping":0,"total":450.01,"couponId":"cupom-061","couponCode":"DIDATICO061","address":{"street":"Rua Fictícia 2","number":"2","dis ...[+82 bytes]
+
+### cliente-a consulta o pedido do cliente-b (RN-10)
+GET /api/orders/pedido-cliente-b -> 200
+corpo: {"id":"pedido-cliente-b","userId":"cliente-b","createdAt":"2026-01-05T00:00:00Z","status":"pago","items":[{"id":"item-00001","productId":"produto-0462","name":"Eletrônicos ?�� Produto 0463","quantity":1,"unitPriceCents":30001,"unitPrice":300.01,"lineTotalCents":30001,"lineTotal":300.01},{"id":"item-00002","productId":"produto-0997","name":"Moda ?�� Produto 0998","quantity":2,"unitPriceCents":15000,"unitPrice":150,"lineTotalCents":30000,"lineTotal":300}],"subtotalCents":60001,"discountCents":15000,"shippingCents":0,"totalCents":45001,"subtotal":600.01,"discount":150,"shipping":0,"total":450.01,"couponId":"cupom-061","couponCode":"DIDATICO061","address":{"street":"Rua Fictícia 2","number":"2","dis ...[+82 bytes]
+
+### cotacao de 1 x produto-0001 (R$ 200,00 exatos) ?�� desconto deve ser 20
+POST /api/cart/quote -> 200
+corpo: {"ok":true,"items":[{"productId":"produto-0001","name":"Livros ?�� Produto 0002","unitPrice":200,"quantity":1,"lineTotal":200}],"subtotal":200,"discount":0,"automaticDiscount":0,"couponDiscount":0,"benefit":null,"shipping":18.5,"total":218.5}
+
+### cotacao de 1 x produto abaixo do limite (produto-teste R$ 150)
+POST /api/cart/quote -> 200
+corpo: {"ok":true,"items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":1,"lineTotal":150}],"subtotal":150,"discount":0,"automaticDiscount":0,"couponDiscount":0,"benefit":null,"shipping":18.5,"total":168.5}
+
+### admin cria produto de R$ 200,05 para o teste de arredondamento
+POST /api/admin/products -> 201
+corpo: {"id":"p-mwkwrad9","name":"Produto Arredondamento","description":"","category":"Geral","price":200.05,"stock":10,"active":true,"inStock":true}
+>>> produto criado: p-mwkwrad9
+
+### cotacao de 1 unidade de R$ 200,05 ?�� desconto de 10% deve ser 20,01
+POST /api/cart/quote -> 200
+corpo: {"ok":true,"items":[{"productId":"p-mwkwrad9","name":"Produto Arredondamento","unitPrice":200.05,"quantity":1,"lineTotal":200.05}],"subtotal":200.05,"discount":20,"automaticDiscount":20,"couponDiscount":0,"benefit":"automatico","shipping":18.5,"total":198.55}
+
+FIM DA FASE F8

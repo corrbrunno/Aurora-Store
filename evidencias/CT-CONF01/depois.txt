@@ -1,0 +1,16 @@
+CT-CONF01 — confirmacao do BUG-10: cupom vencido deve ser recusado.
+Fonte: sondagem/saida_corrigido.txt (versao 1.0.0-corrigida)
+
+### cotacao com cupom ANTIGO (vencido em 06/10/2026)
+POST /api/cart/quote -> 400
+corpo: {"error":"Cupom vencido."}
+
+### checkout aceitando cupom vencido ANTIGO
+POST /api/checkout -> 400
+corpo: {"error":"Cupom vencido."}
+
+FIM DA FASE F5
+
+==============================================================================
+SONDAGEM ?�� fase F6 ?�� base http://127.0.0.1:3000
+executado em 2026-11-17T16:49:46.048Z

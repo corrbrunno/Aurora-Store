@@ -1,0 +1,9 @@
+✔ CT-U01 — desconto automatico respeita a fronteira de R$ 200,00 (RN-01) (1.0477ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 86.2014

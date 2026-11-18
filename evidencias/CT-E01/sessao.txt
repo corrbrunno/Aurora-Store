@@ -1,0 +1,21 @@
+[00:01] início da sessão -> carta: percorrer catálogo, busca, carrinho, cupom e checkout buscando comportamento inesperado
+[00:45] busca com string vazia e com espaços -> 1159 cards visíveis com quatro espaços
+[01:29] busca por termo inexistente -> 0 cards visíveis; texto da grade: ""
+[02:13] busca com 200 caracteres -> 0 cards visíveis; nenhum erro na tela
+[02:57] busca com caracteres especiais -> termo tratado como texto, sem injeção
+[03:42] busca combinada com filtro de categoria -> categorias visíveis: Papelaria
+[04:29] cliques repetidos em Atualizar lista -> 56 chamadas a /api/products em 5 cliques
+[05:13] carrinho vazio pela navegação -> texto visível: "Carrinho"
+[06:13] quantidade zero no carrinho -> feedback: "A quantidade deve ser positiva."; subtotal: (sem resumo)
+[07:12] recuperação depois de quantidade inválida -> linha do carrinho voltou ao recarregar? NÃO; subtotal: (sem resumo)
+[08:10] quantidade negativa no carrinho -> ERRO: locator.fill: Timeout 15000ms exceeded.
+[09:08] quantidade muito alta -> ERRO: locator.fill: Timeout 15000ms exceeded.
+[10:06] cupom em minúsculas e com espaços -> ERRO: locator.fill: Timeout 15000ms exceeded.
+[10:51] cupom vencido ANTIGO -> feedback: "A quantidade deve ser positiva."
+[11:35] cupom inexistente -> feedback: "Cupom inválido."
+[12:20] checkout com endereço incompleto -> feedback: "Não foi possível calcular o carrinho."; comprovante: ""
+[13:05] checkout completo -> comprovante: ""
+[13:51] histórico após recarregar -> 6 pedidos listados; primeiro: "pedido-00847"
+[14:36] navegação por teclado do topo até o catálogo -> ordem do foco: A > search > A > nav-cart > A > A#nav-admin > BUTTON#logout-button > category-filter
+[15:20] viewport estreito 375x667 -> rolagem horizontal: não
+[16:03] fim da sessão -> 20 observações registradas

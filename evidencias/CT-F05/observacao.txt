@@ -1,0 +1,3 @@
+subtotal com 2 unidades: R$ 300,00 (campo quantidade = 2)
+subtotal com 1 unidade: R$ 150,00
+carrinho apos remover: contador=0, texto do conteudo=""

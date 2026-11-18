@@ -1,0 +1,28 @@
+CT-F07 - cupom: validade e nao acumulacao (RF07).
+Fonte: sondagem/saida_sondagem.txt (versao 1.0.0)
+
+### cotacao com cupom ANTIGO (vencido em 06/10/2026)
+POST /api/cart/quote -> 200
+corpo: {"ok":true,"items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":2,"lineTotal":300}],"subtotal":300,"discount":60,"automaticDiscount":30,"couponDiscount":60,"benefit":"cupom","shipping":18.5,"total":258.5}
+
+### cotacao com cupom VINTE (20% valido)
+POST /api/cart/quote -> 200
+corpo: {"ok":true,"items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":2,"lineTotal":300}],"subtotal":300,"discount":60,"automaticDiscount":30,"couponDiscount":60,"benefit":"cupom","shipping":18.5,"total":258.5}
+
+### cotacao com cupom CINCO (5% valido)
+POST /api/cart/quote -> 200
+corpo: {"ok":true,"items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":2,"lineTotal":300}],"subtotal":300,"discount":30,"automaticDiscount":30,"couponDiscount":15,"benefit":"automatico","shipping":18.5,"total":288.5}
+
+### cotacao com cupom inexistente
+POST /api/cart/quote -> 400
+corpo: {"error":"Cupom inválido."}
+
+### checkout aceitando cupom vencido ANTIGO
+POST /api/checkout -> 201
+corpo: {"order":{"id":"ped-1201","userId":"cliente-a","createdAt":"2026-11-17T16:28:13.810Z","items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":2,"lineTotal":300}],"subtotal":300,"discount":60,"shipping":18.5,"total":318.5,"couponCode":"ANTIGO","benefit":"cupom","address":{"street":"Rua Teste","number":"10","district":"Centro","city":"Maricá","state":"RJ","zip":"24900000"},"status":"confirmado"}}
+
+FIM DA FASE F5
+
+==============================================================================
+SONDAGEM ?�� fase F6 ?�� base http://127.0.0.1:3000
+executado em 2026-11-17T16:28:26.083Z

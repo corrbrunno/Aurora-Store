@@ -1,0 +1,17 @@
+# dependencias e saidas de ferramenta
+node_modules/
+test-results/
+logs/
+relatorio-html/
+playwright-report/
+
+# base gerada pelo npm run reset (nao versionar)
+baseline/data/db.json
+corrigido/data/db.json
+
+# arquivos de sistema
+Thumbs.db
+.DS_Store
+
+# artefato de entrega (o conteudo ja esta versionado)
+Entrega_P2_*.zip

@@ -1,0 +1,21 @@
+{
+ "projeto": "firefox",
+ "totais": {
+  "subtotal": "R$ 300,00",
+  "desconto": "R$ 60,00",
+  "frete": "R$ 0,00",
+  "total": "R$ 240,00"
+ },
+ "ambiente": {
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0",
+  "larguraJanela": 1280,
+  "alturaJanela": 720,
+  "alturaDocumento": 1087,
+  "larguraGrid": 1120,
+  "colunasGrid": 4,
+  "alturaCard": 368,
+  "fonteCard": "Segoe UI, Helvetica Neue, sans-serif",
+  "cardsNoCatalogo": 1159,
+  "overflowHorizontal": false
+ }
+}

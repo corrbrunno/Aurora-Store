@@ -1,0 +1,80 @@
+CT-R01 — regressao de sessao: cadastro, login, logout e invalidacao do token.
+Fonte: sondagem/saida_sondagem.txt (versao 1.0.0)
+
+### cadastro valido
+POST /api/auth/register -> 201
+corpo: {"token":"8fc8c2e7be5b5dff8d2e16c1efcaad380d13a12e3390ae47","user":{"id":"u-mwkwoa94","name":"Cliente Probe","email":"probe.1794932849089@loja.test","role":"customer"}}
+
+### cadastro com e-mail ja existente
+POST /api/auth/register -> 400
+corpo: {"error":"Dados inválidos"}
+
+### cadastro com senha curta (3 caracteres)
+POST /api/auth/register -> 400
+corpo: {"error":"Dados inválidos"}
+
+### cadastro com nome de 2 letras
+POST /api/auth/register -> 400
+corpo: {"error":"Dados inválidos"}
+
+### cadastro com e-mail sem arroba
+POST /api/auth/register -> 400
+corpo: {"error":"Dados inválidos"}
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"d8f4fb37f36bcb06bf3232dad975232fd8c0e248954cd953","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### login com senha errada
+POST /api/auth/login -> 401
+corpo: {"error":"E-mail ou senha incorretos."}
+
+### login de usuario inexistente
+POST /api/auth/login -> 401
+corpo: {"error":"E-mail ou senha incorretos."}
+
+### me com token valido
+GET /api/auth/me -> 200
+corpo: {"user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### logout
+POST /api/auth/logout -> 200
+corpo: {"ok":true}
+
+### me depois do logout (token deve ser invalidado)
+GET /api/auth/me -> 401
+corpo: {"error":"Autenticação necessária."}
+
+FIM DA FASE F1
+
+==============================================================================
+SONDAGEM ?�� fase F2 ?�� base http://127.0.0.1:3000
+executado em 2026-11-17T16:27:40.029Z
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"63b44d9edf4a4b424c03bac746790efd34918f67d752b770","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"5a28227436693970bc0537828790c426a0481d2fb4226c96","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"9cb8b2f627a202330b91991e58bb4ef0feefe4ba6d75dc3b","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"1a09491ad76659554a921543c1ff09242ca8c3ac8c367cd7","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"8236567e7793eea0d8e67b011ba633cd51c17429985995c2","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"7e0f313af3af73ffa5895c69bcff348ca4482313073f3dd9","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}
+
+### login cliente-a@loja.test
+POST /api/auth/login -> 200
+corpo: {"token":"cce747f15f34663b667fdb43ac65d993939821ab25b5e656","user":{"id":"cliente-a","name":"Pessoa Fictícia 0001","email":"cliente-a@loja.test","role":"customer"}}

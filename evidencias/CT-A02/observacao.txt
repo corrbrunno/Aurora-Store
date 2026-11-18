@@ -1,0 +1,3 @@
+getByLabel("Nome") encontrou 0 elemento(s)
+getByLabel("E-mail") encontrou 0 elemento(s)
+elementos <label> no formulário: 3 para 3 campos

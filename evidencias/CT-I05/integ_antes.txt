@@ -1,0 +1,28 @@
+✖ CT-I05 — cupom válido não acumula com o desconto automático (RN-05) (44.3272ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 124.8198
+
+✖ failing tests:
+
+test at tests\integration\api.test.js:80:1
+✖ CT-I05 — cupom válido não acumula com o desconto automático (RN-05) (44.3272ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  18.5 !== 0
+  
+      at TestContext.<anonymous> (C:\Users\corre\Documents\Projetos Programação\E-COMERCE TESTE DE SOFTWARE\p2\baseline\tests\integration\api.test.js:87:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1069:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:332:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 18.5,
+    expected: 0,
+    operator: 'strictEqual'
+  }

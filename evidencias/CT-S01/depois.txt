@@ -1,0 +1,18 @@
+CT-S01 — autorizacao entre clientes (RN-10). Esperado: cliente-a nao acessa pedido do cliente-b.
+Fonte: sondagem/saida_corrigido.txt (versao 1.0.0-corrigida)
+
+### cliente-b consulta o pedido do cliente-a (RN-10)
+GET /api/orders/ped-1201 -> 404
+corpo: {"error":"Pedido não encontrado."}
+
+### pedido sem token
+GET /api/orders/ped-1201 -> 401
+corpo: {"error":"Autenticação necessária."}
+
+### controle: cliente-b consulta o proprio pedido do dataset
+GET /api/orders/pedido-cliente-b -> 200
+corpo: {"id":"pedido-cliente-b","userId":"cliente-b","createdAt":"2026-01-05T00:00:00Z","status":"pago","items":[{"id":"item-00001","productId":"produto-0462","name":"Eletrônicos ?�� Produto 0463","quantity":1,"unitPriceCents":30001,"unitPrice":300.01,"lineTotalCents":30001,"lineTotal":300.01},{"id":"item-00002","productId":"produto-0997","name":"Moda ?�� Produto 0998","quantity":2,"unitPriceCents":15000,"unitPrice":150,"lineTotalCents":30000,"lineTotal":300}],"subtotalCents":60001,"discountCents":15000,"shippingCents":0,"totalCents":45001,"subtotal":600.01,"discount":150,"shipping":0,"total":450.01,"couponId":"cupom-061","couponCode":"DIDATICO061","address":{"street":"Rua Fictícia 2","number":"2","dis ...[+82 bytes]
+
+### cliente-a consulta o pedido do cliente-b (RN-10)
+GET /api/orders/pedido-cliente-b -> 404
+corpo: {"error":"Pedido não encontrado."}

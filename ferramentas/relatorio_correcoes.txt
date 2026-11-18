@@ -1,0 +1,20 @@
+ok     BUG-02 desconto no limite de 200 | src/domain/discount.js
+ok     BUG-03 arredondamento half-up | src/domain/money.js
+ok     BUG-01 frete gratis a partir de 300 | src/domain/shipping.js
+ok     BUG-05 quantidade negativa | src/domain/quantity.js
+ok     BUG-04 total subtrai o desconto | src/domain/orderTotals.js
+ok     BUG-10 importa clock e fim do dia | src/domain/coupon.js
+ok     BUG-10 validade do cupom | src/domain/coupon.js
+ok     BUG-09 endereco completo | src/domain/address.js
+ok     BUG-11 ignora preco enviado pelo cliente | src/services/checkout.js
+ok     BUG-06 valida estoque no checkout | src/services/checkout.js
+ok     BUG-09 recusa endereco incompleto | src/services/checkout.js
+ok     BUG-07 baixa o estoque na finalizacao | src/services/checkout.js
+ok     BUG-08 persist grava os pedidos do estado | src/persistence/database.js
+ok     BUG-08 addOrder persiste | src/persistence/database.js
+ok     BUG-12 pedido so do proprio dono | src/routes/api.js
+ok     BUG-13 canRegister com mensagem por campo | src/routes/api.js
+ok     BUG-13 rota devolve a mensagem do campo | src/routes/api.js
+info   pricing.js referencia evaluateCoupon: true
+
+RESULTADO: todos os patches aplicados

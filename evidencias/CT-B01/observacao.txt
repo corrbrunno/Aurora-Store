@@ -1,0 +1,5 @@
+tecnica: analise de valor-limite na particao do frete (abaixo / exatamente / acima de R$ 300,00)
+299.99 -> desconto 30, frete 18.5, total 288.49 (HTTP 200)
+300.00 -> desconto 30, frete 0, total 270 (HTTP 200)
+300.01 -> desconto 30, frete 0, total 270.01 (HTTP 200)
+Esperado: 299,99 paga 18,50; 300,00 e 300,01 com frete zero.

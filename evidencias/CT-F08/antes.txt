@@ -1,0 +1,16 @@
+CT-F08 - endereco completo obrigatorio (RF08).
+Fonte: sondagem/saida_sondagem.txt (versao 1.0.0)
+
+### checkout so com a rua (endereco incompleto)
+POST /api/checkout -> 201
+corpo: {"order":{"id":"ped-1201","userId":"cliente-a","createdAt":"2026-11-17T16:28:02.612Z","items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":1,"lineTotal":150}],"subtotal":150,"discount":0,"shipping":18.5,"total":168.5,"couponCode":null,"benefit":null,"address":{"street":"Rua Teste","number":"","district":"","city":"","state":"","zip":""},"status":"confirmado"}}
+
+### checkout com endereco completo
+POST /api/checkout -> 201
+corpo: {"order":{"id":"ped-1202","userId":"cliente-a","createdAt":"2026-11-17T16:28:02.635Z","items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":1,"lineTotal":150}],"subtotal":150,"discount":0,"shipping":18.5,"total":168.5,"couponCode":null,"benefit":null,"address":{"street":"Rua Teste","number":"10","district":"Centro","city":"Maricá","state":"RJ","zip":"24900000"},"status":"confirmado"}}
+
+FIM DA FASE F4
+
+==============================================================================
+SONDAGEM ?�� fase F5 ?�� base http://127.0.0.1:3000
+executado em 2026-11-17T16:28:13.652Z

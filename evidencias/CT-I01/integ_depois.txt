@@ -1,0 +1,9 @@
+✔ CT-I01 — checkout reduz o estoque e grava o pedido (RN-08) (175.5264ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 257.0402

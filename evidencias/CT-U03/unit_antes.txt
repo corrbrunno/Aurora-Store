@@ -1,0 +1,29 @@
+✖ CT-U03 — quantidade precisa ser inteira e positiva (RN-03) (1.8648ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 88.3796
+
+✖ failing tests:
+
+test at tests\unit\regras.test.js:21:1
+✖ CT-U03 — quantidade precisa ser inteira e positiva (RN-03) (1.8648ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (C:\Users\corre\Documents\Projetos Programação\E-COMERCE TESTE DE SOFTWARE\p2\baseline\tests\unit\regras.test.js:23:10)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1062:25)
+      at Test.start (node:internal/test_runner/test:959:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:332:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual'
+  }

@@ -1,0 +1,23 @@
+{
+ "cadastro": [],
+ "catalogo": [
+  {
+   "id": "color-contrast",
+   "impacto": "serious",
+   "ajuda": "Elements must meet minimum color contrast ratio thresholds",
+   "alvos": [
+    "article[data-product-id=\"produto-0020\"] > .thumb",
+    "article[data-product-id=\"produto-0021\"] > .thumb",
+    "article[data-product-id=\"produto-0022\"] > .thumb"
+   ]
+  },
+  {
+   "id": "select-name",
+   "impacto": "critical",
+   "ajuda": "Select element must have an accessible name",
+   "alvos": [
+    "#category-filter"
+   ]
+  }
+ ]
+}

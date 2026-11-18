@@ -1,0 +1,5 @@
+tecnica: particao de equivalencia com valor-limite na fronteira do desconto (abaixo / exatamente / acima de R$ 200,00)
+199.99 -> desconto 0, frete 18.5, total 218.49 (HTTP 200)
+200.00 -> desconto 20, frete 18.5, total 198.5 (HTTP 200)
+200.01 -> desconto 20, frete 18.5, total 198.51 (HTTP 200)
+Esperado: 199,99 sem desconto; 200,00 e 200,01 com 10%.

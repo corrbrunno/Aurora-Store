@@ -1,0 +1,22 @@
+CT-F01 - cadastro recusa dados invalidos (RF01, caso negativo).
+Fonte: sondagem/saida_sondagem.txt (versao 1.0.0)
+
+### cadastro valido
+POST /api/auth/register -> 201
+corpo: {"token":"8fc8c2e7be5b5dff8d2e16c1efcaad380d13a12e3390ae47","user":{"id":"u-mwkwoa94","name":"Cliente Probe","email":"probe.1794932849089@loja.test","role":"customer"}}
+
+### cadastro com e-mail ja existente
+POST /api/auth/register -> 400
+corpo: {"error":"Dados inválidos"}
+
+### cadastro com senha curta (3 caracteres)
+POST /api/auth/register -> 400
+corpo: {"error":"Dados inválidos"}
+
+### cadastro com nome de 2 letras
+POST /api/auth/register -> 400
+corpo: {"error":"Dados inválidos"}
+
+### cadastro com e-mail sem arroba
+POST /api/auth/register -> 400
+corpo: {"error":"Dados inválidos"}

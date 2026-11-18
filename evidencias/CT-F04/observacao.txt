@@ -1,0 +1,5 @@
+catalogo total de cards: 1159
+busca "papelaria": 145 cards visiveis
+primeiros nomes visiveis: Papelaria — Produto 0003 | Papelaria — Produto 0011 | Papelaria — Produto 0019 | Papelaria — Produto 0027
+filtro categoria "Papelaria": 145 cards visiveis
+categorias visiveis: Papelaria

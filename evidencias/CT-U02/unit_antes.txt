@@ -1,0 +1,29 @@
+✖ CT-U02 — percentual arredonda meio centavo para cima (RN-06) (1.8723ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 88.1039
+
+✖ failing tests:
+
+test at tests\unit\regras.test.js:16:1
+✖ CT-U02 — percentual arredonda meio centavo para cima (RN-06) (1.8723ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  20 !== 20.01
+  
+      at TestContext.<anonymous> (C:\Users\corre\Documents\Projetos Programação\E-COMERCE TESTE DE SOFTWARE\p2\baseline\tests\unit\regras.test.js:17:10)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1062:25)
+      at Test.start (node:internal/test_runner/test:959:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:332:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 20,
+    expected: 20.01,
+    operator: 'strictEqual'
+  }

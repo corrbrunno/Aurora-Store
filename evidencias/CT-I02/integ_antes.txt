@@ -1,0 +1,28 @@
+✖ CT-I02 — pedido criado continua consultável pela API (RN-08) (150.4832ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 247.6149
+
+✖ failing tests:
+
+test at tests\integration\api.test.js:44:1
+✖ CT-I02 — pedido criado continua consultável pela API (RN-08) (150.4832ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  404 !== 200
+  
+      at TestContext.<anonymous> (C:\Users\corre\Documents\Projetos Programação\E-COMERCE TESTE DE SOFTWARE\p2\baseline\tests\integration\api.test.js:53:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:1069:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:332:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 200,
+    operator: 'strictEqual'
+  }

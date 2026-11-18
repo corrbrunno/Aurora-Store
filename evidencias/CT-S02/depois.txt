@@ -1,0 +1,13 @@
+CT-S02 — preco enviado pelo cliente (RN-12). Esperado: servidor usa o preco do catalogo.
+Fonte: sondagem/saida_corrigido.txt (versao 1.0.0-corrigida)
+
+### checkout enviando unitPrice 1 para produto de 150
+POST /api/checkout -> 201
+corpo: {"order":{"id":"ped-1202","userId":"cliente-a","createdAt":"2026-11-17T16:49:46.392Z","items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":1,"lineTotal":150}],"subtotal":150,"discount":0,"shipping":18.5,"total":168.5,"couponCode":null,"benefit":null,"address":{"street":"Rua Teste","number":"10","district":"Centro","city":"Maricá","state":"RJ","zip":"24900000"},"status":"confirmado"}}
+>>> total gravado pelo servidor: 168.5
+
+FIM DA FASE F6
+
+==============================================================================
+SONDAGEM ?�� fase F8 ?�� base http://127.0.0.1:3000
+executado em 2026-11-17T16:49:57.718Z

@@ -1,0 +1,15 @@
+{
+  "name": "loja-aurora-p2-harness",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Harness de testes da P2 - Playwright + axe sobre as copias da Loja Aurora",
+  "scripts": {
+    "test:chrome": "playwright test --project=chrome",
+    "test:compat": "playwright test compatibility.spec.cjs",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.56.0"
+  }
+}

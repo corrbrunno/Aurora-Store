@@ -1,0 +1,14 @@
+CT-R02 — regressao de cupom: desconto nao acumula e cupom inexistente e recusado.
+Fonte: sondagem/saida_corrigido.txt (versao 1.0.0-corrigida)
+
+### cotacao com cupom VINTE (20% valido)
+POST /api/cart/quote -> 200
+corpo: {"ok":true,"items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":2,"lineTotal":300}],"subtotal":300,"discount":60,"automaticDiscount":30,"couponDiscount":60,"benefit":"cupom","shipping":0,"total":240}
+
+### cotacao com cupom CINCO (5% valido)
+POST /api/cart/quote -> 200
+corpo: {"ok":true,"items":[{"productId":"produto-teste","name":"Produto Teste","unitPrice":150,"quantity":2,"lineTotal":300}],"subtotal":300,"discount":30,"automaticDiscount":30,"couponDiscount":15,"benefit":"automatico","shipping":0,"total":270}
+
+### cotacao com cupom inexistente
+POST /api/cart/quote -> 400
+corpo: {"error":"Cupom inválido."}

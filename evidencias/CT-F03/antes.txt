@@ -1,0 +1,23 @@
+CT-F03 - catalogo publico (RF03).
+Fonte: sondagem/saida_sondagem.txt (versao 1.0.0)
+
+### catalogo publico
+GET /api/products -> 200
+corpo: [{"id":"produto-teste","sku":"SKU-00001","name":"Produto Teste","category":"Informática","description":"Produto fictício para laboratório de testes. Modelo 0001.","priceCents":15000,"price":150,"stock":5,"active":true,"weightGrams":1921,"inStock":true},{"id":"produto-0001","sku":"SKU-00002","name":"Livros ?�� Produto 0002","category":"Livros","description":"Produto fictício para laboratório de testes. Modelo 0002.","priceCents":20000,"price":200,"stock":2,"active":true,"weightGrams":4671,"inStock":true},{"id":"produto-0002","sku":"SKU-00003","name":"Papelaria ?�� Produto 0003","category":"Papelaria","description":"Produto fictício para laboratório de testes. Modelo 0003.","priceCents":30000,"pri ...[+300513 bytes]
+>>> itens: 1159
+>>> campos do 1o item: id, sku, name, category, description, priceCents, price, stock, active, weightGrams, inStock
+>>> tamanho da resposta: 301213 bytes
+
+### produto-teste por id
+GET /api/products/produto-teste -> 200
+corpo: {"id":"produto-teste","sku":"SKU-00001","name":"Produto Teste","category":"Informática","description":"Produto fictício para laboratório de testes. Modelo 0001.","priceCents":15000,"price":150,"stock":5,"active":true,"weightGrams":1921,"inStock":true}
+
+### produto inexistente
+GET /api/products/nao-existe -> 404
+corpo: {"error":"Produto não encontrado."}
+
+FIM DA FASE F2
+
+==============================================================================
+SONDAGEM ?�� fase F3 ?�� base http://127.0.0.1:3000
+executado em 2026-11-17T16:27:50.836Z

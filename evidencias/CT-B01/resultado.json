@@ -1,0 +1,29 @@
+{
+ "tecnica": "analise de valor-limite na particao do frete (abaixo / exatamente / acima de R$ 300,00)",
+ "dados": [
+  {
+   "preco": 299.99,
+   "status": 200,
+   "subtotal": 299.99,
+   "desconto": 30,
+   "frete": 18.5,
+   "total": 288.49
+  },
+  {
+   "preco": 300,
+   "status": 200,
+   "subtotal": 300,
+   "desconto": 30,
+   "frete": 0,
+   "total": 270
+  },
+  {
+   "preco": 300.01,
+   "status": 200,
+   "subtotal": 300.01,
+   "desconto": 30,
+   "frete": 0,
+   "total": 270.01
+  }
+ ]
+}

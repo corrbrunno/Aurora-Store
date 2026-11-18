@@ -1,0 +1,10 @@
+CT-R03 — regressao de quantidade: zero e fracionario devem ser recusados.
+Fonte: sondagem/saida_corrigido.txt (versao 1.0.0-corrigida)
+
+### checkout com quantidade 0
+POST /api/checkout -> 400
+corpo: {"error":"A quantidade deve ser positiva."}
+
+### checkout com quantidade fracionaria 1.5
+POST /api/checkout -> 400
+corpo: {"error":"A quantidade deve ser um número inteiro."}

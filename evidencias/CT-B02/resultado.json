@@ -1,0 +1,29 @@
+{
+ "tecnica": "particao de equivalencia com valor-limite na fronteira do desconto (abaixo / exatamente / acima de R$ 200,00)",
+ "dados": [
+  {
+   "preco": 199.99,
+   "status": 200,
+   "subtotal": 199.99,
+   "desconto": 0,
+   "frete": 18.5,
+   "total": 218.49
+  },
+  {
+   "preco": 200,
+   "status": 200,
+   "subtotal": 200,
+   "desconto": 20,
+   "frete": 18.5,
+   "total": 198.5
+  },
+  {
+   "preco": 200.01,
+   "status": 200,
+   "subtotal": 200.01,
+   "desconto": 20,
+   "frete": 18.5,
+   "total": 198.51
+  }
+ ]
+}

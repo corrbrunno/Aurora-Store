@@ -1,0 +1,3 @@
+nome: "Nome de usuário deve ter 3 ou mais caracteres"
+email: "Digite um email válido"
+senha: "Senha deve ter 6 ou mais caracteres"

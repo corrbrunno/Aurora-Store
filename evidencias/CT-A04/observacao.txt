@@ -1,0 +1,2 @@
+cadastro: 0 violação(ões)
+catalogo: 2 violação(ões) -> color-contrast (serious), select-name (critical)
